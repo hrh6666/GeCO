@@ -1,22 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <meta name="description" content="MoELoco: Mixture of Experts for Multitask Locomotion">
-    <meta name="keywords" content="Mixture of Experts, Legged Locomotion, Reinforcement Learning">
+    <meta name="description" content="GeCO: Generative Control as Optimization for adaptive and robust robotic control.">
+    <meta name="keywords" content="GeCO, Robotic Control, Flow Matching, Diffusion Policy, Robotics">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MoELoco: Mixture of Experts for Multitask Locomotion</title>
+    <title>GeCO: Generative Control as Optimization</title>
 
     <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-
     <link rel="stylesheet" href="./static/css/bulma.min.css">
     <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
     <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
     <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
     <link rel="stylesheet" href="./static/css/index.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -24,142 +22,82 @@
     <script src="./static/js/bulma-slider.min.js"></script>
     <script src="./static/js/index.js"></script>
 
-    <link rel="icon" href="./icon.png">
-
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script type="text/javascript">
-        MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['\\[', '\\]'], ['\\begin{equation}', '\\end{equation}']]
-            },
-            svg: {
-                fontCache: 'global'
-            }
-        };
-    </script>
-    <script type="text/javascript" async src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="icon" href="./static/images/openreview.png">
 </head>
 
-
 <body>
-
-    <section class="hero">
+    <section class="hero paper-hero">
         <div class="hero-body">
             <div class="container">
                 <div class="columns is-centered">
-                    <div class="column has-text-centered">
-                        <h1 class="title is-1 publication-title">MoELoco: Mixture of Experts for <br> Multitask Locomotion</h1>
+                    <div class="column is-four-fifths has-text-centered">
+                        <p class="paper-badge">Accepted at LLA 2026 &amp; ReALM-GEN 2026 · ICLR 2026 Workshops</p>
+                        <h1 class="title is-1 publication-title">GeCO: Generative Control as Optimization</h1>
+                        <h2 class="title is-3 publication-subtitle">Time-Unconditional Flow Matching for Adaptive and Robust Robotic Control</h2>
+
                         <div class="is-size-5 publication-authors">
-                            <span class="author-block">
-                                <a href="https://hrh6666.github.io/">Runhan Huang</a><sup>*</sup>&nbsp;&nbsp;</span>
-                            <span class="author-block">
-                  <a href="https://zst1406217.github.io/">Shaoting Zhu</a><sup>*</sup>&nbsp;&nbsp;</span>
-                           <span class="author-block">
-                    <a href="https://yilundu.github.io/">Yilun Du</a>&nbsp;&nbsp;</span>
-                            <span class="author-block">
-                  <a href="https://hangzhaomit.github.io">Hang Zhao</a><sup>†</sup>
-                </span>
-                            </span>
+                            <span class="author-block"><a href="https://scholar.google.com/citations?user=2W320-8AAAAJ&amp;hl=en" target="_blank">Zunzhe Zhang</a><sup>*</sup>,</span>
+                            <span class="author-block"><a href="https://hrh6666.github.io/" target="_blank">Runhan Huang</a><sup>*</sup>,</span>
+                            <span class="author-block"><a href="https://mrmoore98.github.io/liuyicheng/" target="_blank">Yicheng Liu</a>,</span>
+                            <span class="author-block"><a href="https://shaotingzhu.github.io/" target="_blank">Shaoting Zhu</a>,</span>
+                            <span class="author-block"><a href="https://linzhanm.github.io/" target="_blank">Linzhan Mou</a>,</span>
+                            <span class="author-block"><a href="https://hangzhaomit.github.io/" target="_blank">Hang Zhao</a><sup>†</sup></span>
                         </div>
-                        <div class="is-size-5 publication-authors">
-                            * Equal contribution&nbsp;&nbsp;† Corresponding author
+                        <div class="is-size-6 publication-note">
+                            <span><sup>*</sup> Equal contribution</span>
+                            <span class="note-separator">&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+                            <span><sup>†</sup> Corresponding author</span>
                         </div>
-                        <!-- <div class="column">
-                            <image src="./static/images/logo.png" style="width:60%;"></image>
-                        </div> -->
-                        <div class="is-size-4 publication-authors">
-                            IROS 2025
+                        <div class="is-size-6 publication-affiliations">
+                            <span class="author-block">Institute for Interdisciplinary Information Sciences, Tsinghua University, Beijing, China</span><br>
+                            <span class="author-block">Galaxea Inc., Beijing, China</span><br>
+                            <span class="author-block">Department of Computer Science, Princeton University, New Jersey, US</span>
                         </div>
+
                         <div class="column has-text-centered">
                             <div class="publication-links">
-                                <!-- Appendix Link. -->
-                                <!-- <span class="link-block">
-                <a href="./resources/vr-robo-paper.pdf"
-                class="external-link button is-normal is-rounded is-dark" target="_blank">
-                <span class="icon">
-                    <i class="fas fa-file-pdf"></i>
-                </span>
-                                <span>Appendix</span>
-                                </a>
-                                </span> -->
-                                <!-- PDF Link. -->
                                 <span class="link-block">
-                <a href="./resources/MoELoco_paper.pdf"
-                   class="external-link button is-normal is-rounded is-dark" target="_blank">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                                <span>Paper</span>
-                                </a>
+                                    <a href="./resources/GeCO_Arxiv.pdf" class="external-link button is-normal is-rounded is-dark" target="_blank">
+                                        <span class="icon">
+                                            <i class="fas fa-file-alt"></i>
+                                        </span>
+                                        <span>Paper</span>
+                                    </a>
                                 </span>
-                                <!-- arXiv Link. -->
                                 <span class="link-block">
-                <a href="https://arxiv.org/abs/2503.08564"
-                   class="external-link button is-normal is-rounded is-dark" target="_blank">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                                <span>arXiv</span>
-                                </a>
+                                    <a href="#" class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fab fa-github"></i>
+                                        </span>
+                                        <span>Code (Coming Soon)</span>
+                                    </a>
                                 </span>
-                                <!-- Video Link. -->
                                 <span class="link-block">
-                <a href="https://youtu.be/8b3zAlpLmmg?si=XXTuEOE7rBniIK4c"
-                   class="external-link button is-normal is-rounded is-dark" target="_blank">
-                  <span class="icon">
-                      <i class="fab fa-youtube"></i>
-                  </span>
-                                <span>Video</span>
-                </a>
-                </span>
-                <!-- Bilibili Link. -->
-                <span class="link-block">
-                    <a href="https://www.bilibili.com/video/BV1fWRJY8EcS/"
-                    class="external-link button is-normal is-rounded is-dark" target="_blank">
-                    <span class="icon">
-                        <i class="fab fa-youtube"></i>
-                    </span>
-                                    <span>Bilibili</span>
-                    </a>
-                </span>
-                                <!-- Poster Link. -->
-                                <!-- <span class="link-block">
-                <a href="./resources/poster-compressed.pdf"
-                    class="external-link button is-normal is-rounded is-dark" target="_blank">
-                    <span class="icon">
-                      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 viewBox="0 0 428.108 428.108" style="enable-background:new 0 0 428.108 428.108;" xml:space="preserve"><path fill="currentColor" id="XMLID_1137_" d="M236.503,387.867c0,3.866-3.134,7-7,7h-30.898c-3.866,0-7-3.134-7-7s3.134-7,7-7h30.898	C233.369,380.867,236.503,384,236.503,387.867z M314.878,144.35c0,12.285-4.131,23.625-11.076,32.702	c7.079,13.78,11.076,29.392,11.076,45.92c0,55.595-45.229,100.825-100.825,100.825c-55.595,0-100.825-45.23-100.825-100.825	c0-54.853,44.028-99.615,98.601-100.802c8.473-18.695,27.312-31.733,49.137-31.733C290.693,90.437,314.878,114.623,314.878,144.35z	 M221.054,144.35c0,22.008,17.904,39.913,39.912,39.913c9.671,0,18.551-3.458,25.466-9.202	c-14.213-21.399-37.658-36.167-64.602-38.569C221.32,139.033,221.054,141.661,221.054,144.35z M300.878,222.972	c0-12.638-2.715-24.655-7.591-35.498c-9.012,6.772-20.206,10.789-32.321,10.789c-29.728,0-53.913-24.186-53.913-53.913	c0-2.707,0.201-5.368,0.588-7.97c-44.893,3.293-80.413,40.872-80.413,86.592c0,47.876,38.949,86.825,86.825,86.825	S300.878,270.848,300.878,222.972z M300.878,144.35c0-22.008-17.904-39.913-39.912-39.913c-14.163,0-26.628,7.417-33.714,18.569	c28.1,3.689,52.593,18.996,68.486,40.923C299.01,158.141,300.878,151.46,300.878,144.35z M252.177,355.057h-76.244	c-3.866,0-7,3.134-7,7s3.134,7,7,7h76.244c3.866,0,7-3.134,7-7S256.043,355.057,252.177,355.057z M379.295,49.957v371.151	c0,3.866-3.134,7-7,7H55.813c-3.866,0-7-3.134-7-7V49.957c0-3.866,3.134-7,7-7h68.925l86.236-42.243	c1.943-0.951,4.216-0.951,6.159,0l86.236,42.243h68.925C376.161,42.957,379.295,46.09,379.295,49.957z M156.563,42.957h114.983	l-57.492-28.162L156.563,42.957z M365.295,56.957h-63.404c-0.098,0.003-0.196,0.003-0.296,0H126.514	c-0.099,0.002-0.198,0.002-0.296,0H62.813v357.151h302.482V56.957z"/><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>                    </span>
-                    <span>Poster</span>
-                </a>
-              </span> -->
-                <!-- twitter Link. -->
-                <span class="link-block">
-                <a href="#"
-                   class="external-link button is-normal is-rounded is-dark" target="_blank">
-                  <span class="icon">
-                      <i class="fab fa-twitter"></i>
-                  </span>
-                                <span>Summary</span>
-                                </a>
+                                    <a href="#" class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="ai ai-arxiv"></i>
+                                        </span>
+                                        <span>arXiv (Coming Soon)</span>
+                                    </a>
                                 </span>
-                <!-- Code Link. -->
-                <span class="link-block">
-                <a href="https://github.com/hrh6666/MoE-Loco"
-                   class="external-link button is-normal is-rounded is-dark" target="_blank">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                                <span>Code</span>
-                </a>
-                </span>
+                                <span class="link-block">
+                                    <a href="https://openreview.net/forum?id=LC1f9VX4pG" class="external-link button is-normal is-rounded is-dark" target="_blank">
+                                        <span class="icon">
+                                            <i class="fas fa-comments"></i>
+                                        </span>
+                                        <span>OpenReview</span>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
 
-            </div>
-        </div>
-                        <div class="columns is-centered">
+                        <div class="columns is-centered teaser-row">
                             <div class="column is-four-fifths is-centered has-text-centered">
-                                <figure>
-                                    <img src="./static/images/teaser.png" alt="figure1" style="width: 80%;">
+                                <figure class="teaser-card">
+                                    <img src="./static/images/teaser.png" alt="GeCO teaser" class="teaser-image">
+                                    <figcaption class="teaser-caption">
+                                        GeCO learns a stationary velocity field over action sequences, enabling adaptive inference and intrinsic OOD awareness for robotic control.
+                                    </figcaption>
                                 </figure>
                             </div>
                         </div>
@@ -169,39 +107,20 @@
         </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="abstract">
         <div class="container">
-            <div class="columns is-centered">
-                <div class="column is-full-width is-centered has-text-centered">
-                    <!-- <h2 class="title is-2" style="text-align: center;" id="method-video" >Real-World Robot Parkour Demos</h2> -->
-                    <div class="publication-video">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/8b3zAlpLmmg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="container">
-            <!-- Abstract. -->
             <div class="columns is-centered has-text-centered">
                 <div class="column is-four-fifths">
                     <h2 class="title is-2">Abstract</h2>
-                    <div class="content has-text-justified">
+                    <div class="content has-text-justified paper-content">
                         <p>
-                            We present MoE-Loco, a Mixture of Experts (MoE) framework for
-                            multitask locomotion for legged robots. Our method enables a 
-                            single policy to handle diverse terrains, including bars, pits,
-                            stairs, slopes, and baffles, while supporting quadrupedal and 
-                            bipedal gaits. Using MoE, we mitigate the gradient conflicts 
-                            that typically arise in multitask reinforcement learning, 
-                            improving both training efficiency and performance. 
-                            Our experiments demonstrate that different experts naturally 
-                            specialize in distinct locomotion behaviors, which can be 
-                            leveraged for task migration and skill composition. 
-                            We further validate our approach in both simulation and real-world deployment, 
-                            showcasing its robustness and adaptability.                        
+                            Diffusion models and flow matching have become a cornerstone of robotic imitation learning, yet they suffer from a structural inefficiency where inference is often bound to a fixed integration schedule that is agnostic to state complexity. This paradigm forces the policy to expend the same computational budget on trivial motions as it does on complex tasks. We introduce <strong>Generative Control as Optimization (GeCO)</strong>, a time-unconditional framework that transforms action synthesis from trajectory integration into iterative optimization.
+                        </p>
+                        <p>
+                            GeCO learns a stationary velocity field in the action-sequence space where expert behaviors form stable attractors. As a result, test-time inference becomes adaptive: it can exit early for simple states while refining longer for difficult ones. The same stationary geometry also provides an intrinsic, training-free safety signal, since the field norm at the optimized action acts as a robust out-of-distribution detector.
+                        </p>
+                        <p>
+                            We validate GeCO on standard simulation benchmarks and demonstrate that it scales naturally to π0-series Vision-Language-Action models. As a plug-and-play replacement for standard flow-matching heads, GeCO improves both success rate and efficiency while offering an optimization-native mechanism for safer deployment.
                         </p>
                     </div>
                 </div>
@@ -209,71 +128,53 @@
         </div>
     </section>
 
-
-
-    <section class="section">
+    <section class="section section-alt" id="highlights">
         <div class="container">
-            <h2 class="title is-2" style="text-align: center;">Method</h2>
-            <h2 class="title is-4" style="text-align: center;">MoE Based Multitask Locomotion Learning </h2>
-            <div class="columns is-centered">
-                <div class="column is-four-fifths is-centered has-text-centered">
-                    <figure>
-                        <img src="./static/images/framework.png" alt="framework" style="width: 110%;">
-                    </figure>
-                </div>
-            </div>
             <div class="columns is-centered has-text-centered">
                 <div class="column is-four-fifths">
-                    <div class="content has-text-justified">
-                        <p>
-                            Our training primarily follows the Probability Annealing Selection (PAS) paradigm.
-                            Overall, the robot utilizes both previleged and proprioceptive information in the first stage,
-                            and gradually transitions to proprioceptive information only in the second 
-                            stage by probablistic annealing. The key design is that we incorporate a Mixture of Experts (MoE) 
-                            structure to handle the multi-task reinforcement learning problem.
-                        </p>
-                        <p>
-                            \begin{equation}
-                                \hat{\boldsymbol{g}_{i}} = \text{softmax} (g(\boldsymbol{h}_t))[i]
-                            \end{equation}
-                            \begin{equation}
-                                \boldsymbol{a}_t = \sum_{i = 1}^{N}\hat{\boldsymbol{g}_{i}}\cdot f_{i}(\boldsymbol{h}_t)
-                            \end{equation}
-                        </p>
-                        <p>
-                            The MoE architecture facilitates the coordination of similar task skills 
-                            while minimizing conflicts between heterogeneous tasks by dynamically 
-                            routing tasks to appropriate experts. This automatic routing enables 
-                            specialization, improving both efficiency and task performance. 
-                            Additionally, we incorporate MoE into the critic network to better 
-                            capture diverse task reward structures. 
-                        </p>
+                    <h2 class="title is-2">Highlights</h2>
+                    <div class="columns is-multiline highlight-grid">
+                        <div class="column is-4-desktop is-12-mobile">
+                            <div class="highlight-card">
+                                <div class="highlight-icon"><i class="fas fa-sync-alt"></i></div>
+                                <h3 class="title is-5">Optimization-Based Inference</h3>
+                                <p>Replace fixed-step trajectory integration with an adaptive iterative optimization process in action space.</p>
+                            </div>
+                        </div>
+                        <div class="column is-4-desktop is-12-mobile">
+                            <div class="highlight-card">
+                                <div class="highlight-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                <h3 class="title is-5">Adaptive Computation</h3>
+                                <p>Allocate more refinement to hard states and stop early on easy states, improving inference efficiency.</p>
+                            </div>
+                        </div>
+                        <div class="column is-4-desktop is-12-mobile">
+                            <div class="highlight-card">
+                                <div class="highlight-icon"><i class="fas fa-shield-alt"></i></div>
+                                <h3 class="title is-5">Intrinsic OOD Awareness</h3>
+                                <p>Use the stationary field norm as a training-free signal for anomaly detection and safer deployment.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <h2 class="title is-4" style="text-align: center;">Skill Composition and Decomposition</h2>
-            
+        </div>
+    </section>
+
+    <section class="section" id="method">
+        <div class="container">
             <div class="columns is-centered has-text-centered">
                 <div class="column is-four-fifths">
-                    <div class="content has-text-justified">
+                    <h2 class="title is-2">Method Overview</h2>
+                    <div class="content has-text-justified paper-content">
                         <p>
-                            With the automatic decomposition of expert skills, we can recombine them with adjustable weights 
-                            to synthesize new skills and gaits. Formally, we leverage pretrained experts and modify the gating weights as follows:
+                            Conventional diffusion and flow-matching policies learn time-dependent vector fields and rely on a pre-defined inference schedule. GeCO removes this dependency by learning a <strong>single stationary velocity field</strong> in the action-sequence space. Expert actions become stable attractors, turning action generation into a convergence problem rather than a rollout through fictitious time.
                         </p>
-
-                        <p style="text-align: center;">
-                            \[
-                            \hat{\boldsymbol{g}_{i}} = w[i] \cdot \text{softmax} (g(\boldsymbol{h}_t))[i],
-                            \]
-                        </p>
-
                         <p>
-                            where \( w[i] \) can be manually defined or dynamically adjusted by a neural network. 
-                            This formulation enables controlled skill blending, allowing the robot to adapt and generalize 
-                            to novel locomotion patterns. The skill composition results from the 
-                            automatic skill decomposition and interpretability inherent in the MoE architecture. 
-                            In contrast, a standard neural network would function as a black box, 
-                            lacking such interpretable skill decomposition.
+                            To ensure robust optimization in continuous control, GeCO introduces a velocity rescaling mechanism that modulates the field magnitude based on the distance to the expert manifold. This creates a geometric sink around valid action modes and yields a practical inference loop that is both adaptive and stable.
+                        </p>
+                        <p>
+                            Because the learned field is stationary, its residual norm directly reflects whether the current state-action pair lies near a learned in-distribution manifold. This provides a simple but effective uncertainty estimate without auxiliary heads, ensembles, or extra safety networks.
                         </p>
                     </div>
                 </div>
@@ -281,216 +182,31 @@
         </div>
     </section>
 
-    <section class="section">
+    <section class="section section-alt" id="results">
         <div class="container">
-            <h2 class="title is-2" style="text-align: center;">Experiments</h2>
-
-            <h2 class="title is-4" style="text-align: center;">Gradient Conflict Experimients</h2>
             <div class="columns is-centered has-text-centered">
                 <div class="column is-four-fifths">
-                    <div class="content has-text-justified">
-                        <p>
-                            The MoE policy significantly reduces gradient conflict between bipedal and
-                            quadrupedal tasks. It also minimizes gradient conflict even
-                            between quadrupedal tasks that require fundamentally different skills, such as quadrupedal bar crossing and quadrupedal
-                            baffle crawling.
-                        </p>
-                        </div>
-                </div>
-            </div>
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <div class="content has-text-justified">
-                        <figure>
-                            <img src="./static/images/gd.png" alt="gd" style="width: 80%;">
-                        </figure>
-                    </div>
-                </div>
-            </div>
-
-            <h2 class="title is-4" style="text-align: center;">Real-World Experiments</h2>
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <div class="content has-text-justified">
-                        <p>
-                            We conducted real-world experiments over multiple terrains and gaits: 
-                            1. Bar (Quad), 2. Pit (Quad), 3. Baffle (Quad), 4. Stair (Quad), 
-                            5. Slope (Quad), 6. Stand up (Bip), 7. Walk (Bip), 8. Slope (Bip), 9. Stair (Bip).
-                        </p>
-                        </div>
-                </div>
-            </div>
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <div class="content has-text-justified">
-                        <figure>
-                            <img src="./static/images/real-exp.png" alt="real-exp" style="width: 100%;">
-                        </figure>
-                    </div>
-                </div>
-            </div>
-
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <div class="content has-text-justified">
-                        <p>
-                            We deploy our MoE policy zero-shotly on real robots and conduct real world experiments.
-                            We test mix terrain that contains all challenging tasks, as well
-                            as each separated terrains.
-                        </p>
-                        </div>
-                </div>
-            </div>
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <div class="content has-text-justified">
-                        <figure>
-                            <img src="./static/images/real-plot.png" alt="real-plot" style="width: 70%;">
-                        </figure>
-                    </div>
-                </div>
-            </div>
-            <h2 class="title is-4" style="text-align: center;">Expert Spetialization</h2>
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <div class="content has-text-justified">
-                        <p>
-                            We examined the expert usage in different tasks. We plot the mean weight of 
-                            different experts across various tasks. 
-                            It is evident that the distribution of gating weights varies significantly 
-                            from task to task, demonstrating the expertise and differentiation of various experts.
-                        </p>
-                        </div>
-                </div>
-            </div>
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <div class="content has-text-justified">
-                        <figure>
-                            <img src="./static/images/gating_weight_plot.png" alt="gating_weight_plot" style="width: 100%;">
-                        </figure>
-                    </div>
-                </div>
-            </div>
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <div class="content has-text-justified">
-                        <p>
-                            To further analyze the composition of different experts across various tasks, 
-                            we use t-SNE to visualize the output of the gating network for different 
-                            tasks (i.e., the weight of each expert). 
-                            As shown below, the bipedal and quadrupedal tasks form distinct clusters.
-                        </p>
-                        </div>
-                </div>
-            </div>
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <div class="content has-text-justified">
-                        <figure>
-                            <img src="./static/images/expert_gating_tsne.png" alt="expert_gating_tsne" style="width: 60%;">
-                        </figure>
+                    <h2 class="title is-2">Why GeCO</h2>
+                    <div class="content has-text-justified paper-content">
+                        <ul class="paper-list">
+                            <li><strong>More efficient inference:</strong> computation is driven by convergence rather than a rigid number of denoising or integration steps.</li>
+                            <li><strong>Better robustness:</strong> the learned stationary geometry naturally separates in-distribution and anomalous states.</li>
+                            <li><strong>Drop-in compatibility:</strong> GeCO can serve as a plug-and-play replacement for standard flow-matching heads.</li>
+                            <li><strong>Scalable design:</strong> the framework applies to both standard simulation policies and large Vision-Language-Action models.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
+    <footer class="footer" id="footer">
         <div class="container">
-            <h2 class="title is-4" style="text-align: center;">Skill Composition</h2>
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <div class="content has-text-justified">
-                        <p>
-                            We discovered that one expert specializes 
-                            in balancing, which helps lift the robot's body but limits its agility. 
-                            Another expert is responsible for lifting one of the front legs to perform 
-                            crossing tasks, enabling the robot to execute basic movement skills. 
-                            By selecting the balancing expert and the crossing expert, we are able to 
-                            zero-shot transfer to a new dribbling pattern. The new dribbling gait 
-                            allows the robot to walk effectively while periodically using one of its 
-                            front legs to kick the ball. 
-                        </p>
-                        </div>
-                </div>
+            <div class="content has-text-centered">
+                <p>Page template adapted from <a href="https://nerfies.github.io/"><span class="dnerf">Nerfies</span></a>.</p>
             </div>
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <div class="content has-text-justified">
-                        <figure>
-                            <img src="./static/images/dribble.png" alt="dribble" style="width: 100%;">
-                        </figure>
-                    </div>
-                </div>
-            </div>
-
-            <h2 class="title is-4" style="text-align: center;">Adaptation Experiment</h2>
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <div class="content has-text-justified">
-                        <p>
-                            We conduct an adaptation learning experiment to demonstrate how our pretrained experts can be recomposed and
-                            adapted to new tasks. In this experiment, we design the robot
-                            to walk on three feet.
-                        </p>
-                        </div>
-                </div>
-            </div>
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <div class="content has-text-justified">
-                        <figure>
-                            <img src="./static/images/3feet.png" alt="3feet" style="width: 100%;">
-                        </figure>
-                    </div>
-                </div>
-            </div>
-
-            <h2 class="title is-4" style="text-align: center;">Simulation Experiments</h2>
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <div class="content has-text-justified">
-                        <p>
-                            We constructed a benchmark for quadrupedal robot locomotion across different tasks. 
-                            Our benchmark consists of a 5m times 100m runway with various obstacles evenly distributed along the path. 
-                        </p>
-                        </div>
-                </div>
-            </div>
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <div class="content has-text-justified">
-                        <figure>
-                            <img src="./static/images/sim-exp.png" alt="sim-exp" style="width: 100%;">
-                        </figure>
-                    </div>
-                </div>
-            </div>
-
-
-            <section class="section" id="BibTeX">
-                <div class="container content">
-                    <h2 class="titile">BibTeX</h2>
-                    
-                    <pre><code>@inproceedings{huang2025moe,
-  title={Moe-loco: Mixture of experts for multitask locomotion},
-  author={Huang, Runhan and Zhu, Shaoting and Du, Yilun and Zhao, Hang},
-  booktitle={2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
-  pages={14218--14225},
-  year={2025},
-  organization={IEEE}
-}
-</code></pre>
-                </div>
-            </section>
-
-            <footer class="footer">
-                <div class="container">
-                    <div class="content has-text-centered">
-                        <p>Page template borrowed from <a href="https://nerfies.github.io/"><span class="dnerf">Nerfies</span></a>.</p>
-                    </div>
-                </div>
-            </footer>
-
+        </div>
+    </footer>
 </body>
 
 </html>
