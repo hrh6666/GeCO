@@ -2,235 +2,411 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="description" content="GeCO: Generative Control as Optimization for adaptive and robust robotic control.">
-    <meta name="keywords" content="GeCO, Robotic Control, Flow Matching, Diffusion Policy, Robotics">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GeCO: Generative Control as Optimization</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GeCO: Generative Control as Optimization</title>
+  <meta name="description" content="GeCO: Generative Control as Optimization — time-unconditional flow matching for adaptive and robust robotic control.">
+  <meta name="keywords" content="GeCO, Robotic Control, Flow Matching, Diffusion Policy, VLA, Robotics, Imitation Learning">
 
-    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-    <link rel="stylesheet" href="./static/css/bulma.min.css">
-    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-    <link rel="stylesheet" href="./static/css/index.css">
+  <meta property="og:title" content="GeCO: Generative Control as Optimization">
+  <meta property="og:description" content="Turn action generation into convergence: adaptive compute and intrinsic OOD awareness for robot policies.">
+  <meta property="og:image" content="https://hrh6666.github.io/GeCO/static/images/teaser.jpg">
+  <meta name="twitter:card" content="summary_large_image">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script defer src="./static/js/fontawesome.all.min.js"></script>
-    <script src="./static/js/bulma-carousel.min.js"></script>
-    <script src="./static/js/bulma-slider.min.js"></script>
-    <script src="./static/js/index.js"></script>
+  <link rel="icon" type="image/svg+xml" href="./static/images/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="./static/css/geco.css">
 
-    <link rel="icon" type="image/svg+xml" href="./static/images/favicon.svg">
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script defer src="./static/js/geco.js"></script>
 </head>
 
 <body>
-    <section class="hero paper-hero">
-        <div class="hero-body">
-            <div class="container">
-                <div class="columns is-centered">
-                    <div class="column is-four-fifths has-text-centered">
-                        <p class="paper-badge">Accepted at LLA 2026 &amp; ReALM-GEN 2026 · ICLR 2026 Workshops</p>
-                        <h1 class="title is-1 publication-title">GeCO: Generative Control as Optimization</h1>
-                        <h2 class="title is-3 publication-subtitle">Time-Unconditional Flow Matching for Adaptive and Robust Robotic Control</h2>
+  <nav class="topnav" id="topnav">
+    <div class="topnav-inner">
+      <a href="#top" class="brand">GeCO</a>
+      <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#method">Method</a>
+        <a href="#real-world">Real Robot</a>
+        <a href="#adaptive">Adaptive Compute</a>
+        <a href="#results">Results</a>
+        <a href="#ood">OOD</a>
+        <a href="#bibtex">BibTeX</a>
+      </div>
+    </div>
+  </nav>
 
-                        <div class="is-size-5 publication-authors">
-                            <span class="author-block"><a href="https://scholar.google.com/citations?user=2W320-8AAAAJ&amp;hl=en" target="_blank">Zunzhe Zhang</a><sup>*</sup>,</span>
-                            <span class="author-block"><a href="https://hrh6666.github.io/" target="_blank">Runhan Huang</a><sup>*</sup>,</span>
-                            <span class="author-block"><a href="https://mrmoore98.github.io/liuyicheng/" target="_blank">Yicheng Liu</a>,</span>
-                            <span class="author-block"><a href="https://shaotingzhu.github.io/" target="_blank">Shaoting Zhu</a>,</span>
-                            <span class="author-block"><a href="https://linzhanm.github.io/" target="_blank">Linzhan Mou</a>,</span>
-                            <span class="author-block"><a href="https://hangzhaomit.github.io/" target="_blank">Hang Zhao</a><sup>†</sup></span>
-                        </div>
-                        <div class="is-size-6 publication-note">
-                            <span><sup>*</sup> Equal contribution. Author order was determined randomly.</span>
-                            <span class="note-separator">&nbsp;&nbsp;·&nbsp;&nbsp;</span>
-                            <span><sup>†</sup> Corresponding author</span>
-                        </div>
-                        <div class="is-size-6 publication-affiliations">
-                            <span class="author-block">Institute for Interdisciplinary Information Sciences, Tsinghua University, Beijing, China</span><br>
-                            <span class="author-block">Galaxea Inc., Beijing, China</span><br>
-                            <span class="author-block">Department of Computer Science, Princeton University, New Jersey, US</span>
-                        </div>
+  <!-- ============ HERO ============ -->
+  <header class="hero" id="top">
+    <div class="wrap">
+      <p class="badge">LLA 2026 &amp; ReALM-GEN 2026 · ICLR 2026 Workshops</p>
+      <h1 class="title"><span class="accent">GeCO</span>: Generative Control as Optimization</h1>
+      <p class="subtitle">Time-Unconditional Flow Matching for Adaptive and Robust Robotic Control</p>
 
-                        <div class="column has-text-centered">
-                            <div class="publication-links">
-                                <span class="link-block">
-                                    <a href="./resources/GeCO_Arxiv.pdf" class="external-link button is-normal is-rounded is-dark" target="_blank">
-                                        <span class="icon">
-                                            <i class="fas fa-file-alt"></i>
-                                        </span>
-                                        <span>Paper</span>
-                                    </a>
-                                </span>
-                                <span class="link-block">
-                                    <a href="#" class="external-link button is-normal is-rounded is-dark">
-                                        <span class="icon">
-                                            <i class="fab fa-github"></i>
-                                        </span>
-                                        <span>Code (Coming Soon)</span>
-                                    </a>
-                                </span>
-                                <span class="link-block">
-                                    <a href="#" class="external-link button is-normal is-rounded is-dark">
-                                        <span class="icon">
-                                            <i class="fas fa-video"></i>
-                                        </span>
-                                        <span>Video (Coming Soon)</span>
-                                    </a>
-                                </span>
-                                <span class="link-block">
-                                    <a href="https://arxiv.org/abs/2603.17834" class="external-link button is-normal is-rounded is-dark">
-                                        <span class="icon">
-                                            <i class="ai ai-arxiv"></i>
-                                        </span>
-                                        <span>arXiv</span>
-                                    </a>
-                                </span>
-                                <span class="link-block">
-                                    <a href="https://openreview.net/forum?id=BdEz1fISBu" class="external-link button is-normal is-rounded is-dark" target="_blank">
-                                        <span class="icon">
-                                            <i class="fas fa-comments"></i>
-                                        </span>
-                                        <span>OpenReview</span>
-                                    </a>
-                                </span>
-                            </div>
-                        </div>
+      <div class="authors">
+        <span><a href="https://scholar.google.com/citations?user=2W320-8AAAAJ&amp;hl=en" target="_blank">Zunzhe Zhang</a><sup>1,3*</sup></span>
+        <span><a href="https://hrh6666.github.io/" target="_blank">Runhan Huang</a><sup>1*</sup></span>
+        <span><a href="https://mrmoore98.github.io/liuyicheng/" target="_blank">Yicheng Liu</a><sup>1,3</sup></span>
+        <span><a href="https://shaotingzhu.github.io/" target="_blank">Shaoting Zhu</a><sup>1</sup></span>
+        <span><a href="https://linzhanm.github.io/" target="_blank">Linzhan Mou</a><sup>2</sup></span>
+        <span><a href="https://hangzhaomit.github.io/" target="_blank">Hang Zhao</a><sup>1,3†</sup></span>
+      </div>
+      <div class="affils">
+        <span><sup>1</sup>IIIS, Tsinghua University</span>
+        <span><sup>2</sup>Princeton University</span>
+        <span><sup>3</sup>Galaxea Inc.</span>
+      </div>
+      <p class="note"><sup>*</sup>Equal contribution, order determined randomly &nbsp;·&nbsp; <sup>†</sup>Corresponding author</p>
 
-                        <div class="columns is-centered teaser-row">
-                            <div class="column is-four-fifths is-centered has-text-centered">
-                                <figure class="teaser-card">
-                                    <img src="./static/images/teaser.png" alt="GeCO teaser" class="teaser-image">
-                                    <figcaption class="teaser-caption">
-                                        GeCO learns a stationary velocity field over action sequences, enabling adaptive inference and intrinsic OOD awareness for robotic control.
-                                    </figcaption>
-                                </figure>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="links">
+        <a class="btn" href="./resources/GeCO_Arxiv.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Paper</a>
+        <a class="btn" href="https://arxiv.org/abs/2603.17834" target="_blank"><i class="ai ai-arxiv"></i> arXiv</a>
+        <a class="btn" href="https://openreview.net/forum?id=BdEz1fISBu" target="_blank"><i class="fas fa-comments"></i> OpenReview</a>
+        <a class="btn btn-ghost" href="#" aria-disabled="true"><i class="fab fa-github"></i> Code <small>(soon)</small></a>
+        <a class="btn btn-ghost" href="#" aria-disabled="true"><i class="fas fa-video"></i> Video <small>(soon)</small></a>
+      </div>
+    </div>
+
+    <!-- Real-robot showcase -->
+    <div class="wrap wide">
+      <div class="showcase">
+        <figure class="showcase-item">
+          <img src="./static/images/real_nut_rollout.jpg" alt="GeCO executing Nut Assembly on the Galaxea R1 Lite">
+          <figcaption><span class="pill">Real robot</span> Nut Assembly: grasp, align, and thread two nuts onto their bolts</figcaption>
+        </figure>
+        <figure class="showcase-item">
+          <img src="./static/images/real_tube_rollout.jpg" alt="GeCO executing Chemistry Tube Arrangement on the Galaxea R1 Lite">
+          <figcaption><span class="pill">Real robot</span> Tube Arrangement: insert tubes into tight-tolerance rack slots</figcaption>
+        </figure>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ TL;DR + STATS ============ -->
+  <section class="section" id="overview">
+    <div class="wrap">
+      <div class="tldr">
+        <span class="tldr-label">TL;DR</span>
+        <p>Instead of integrating a time-conditioned flow along a fixed schedule, GeCO learns a <b>stationary</b> velocity field over action sequences and <b>optimizes until it converges</b>. Easy states exit after a few steps and hard ones refine longer. The leftover field norm doubles as a <b>free out-of-distribution detector</b>.</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-num">30→70<span>%</span></div>
+          <div class="stat-label">Real-world success<br>Nut Assembly</div>
         </div>
-    </section>
-
-    <section class="section" id="abstract">
-        <div class="container">
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <h2 class="title is-2">Abstract</h2>
-                    <div class="content has-text-justified paper-content">
-                        <p>
-                            Diffusion models and flow matching have become a cornerstone of robotic imitation learning, yet they suffer from a structural inefficiency where inference is often bound to a fixed integration schedule that is agnostic to state complexity. This paradigm forces the policy to expend the same computational budget on trivial motions as it does on complex tasks. We introduce <strong>Generative Control as Optimization (GeCO)</strong>, a time-unconditional framework that transforms action synthesis from trajectory integration into iterative optimization.
-                        </p>
-                        <p>
-                            GeCO learns a stationary velocity field in the action-sequence space where expert behaviors form stable attractors. As a result, test-time inference becomes adaptive: it can exit early for simple states while refining longer for difficult ones. The same stationary geometry also provides an intrinsic, training-free safety signal, since the field norm at the optimized action acts as a robust out-of-distribution detector.
-                        </p>
-                        <p>
-                            We validate GeCO on standard simulation benchmarks and demonstrate that it scales naturally to π0-series Vision-Language-Action models. As a plug-and-play replacement for standard flow-matching heads, GeCO improves both success rate and efficiency while offering an optimization-native mechanism for safer deployment.
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <div class="stat">
+          <div class="stat-num">25→80<span>%</span></div>
+          <div class="stat-label">Real-world success<br>Tube Arrangement</div>
         </div>
-    </section>
-
-    <section class="section section-alt" id="highlights">
-        <div class="container">
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <h2 class="title is-2">Highlights</h2>
-                    <div class="columns is-multiline highlight-grid">
-                        <div class="column is-4-desktop is-12-mobile">
-                            <div class="highlight-card">
-                                <div class="highlight-icon"><i class="fas fa-sync-alt"></i></div>
-                                <h3 class="title is-5">Optimization-Based Inference</h3>
-                                <p>Replace fixed-step trajectory integration with an adaptive iterative optimization process in action space.</p>
-                            </div>
-                        </div>
-                        <div class="column is-4-desktop is-12-mobile">
-                            <div class="highlight-card">
-                                <div class="highlight-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                <h3 class="title is-5">Adaptive Computation</h3>
-                                <p>Allocate more refinement to hard states and stop early on easy states, improving inference efficiency.</p>
-                            </div>
-                        </div>
-                        <div class="column is-4-desktop is-12-mobile">
-                            <div class="highlight-card">
-                                <div class="highlight-icon"><i class="fas fa-shield-alt"></i></div>
-                                <h3 class="title is-5">Intrinsic OOD Awareness</h3>
-                                <p>Use the stationary field norm as a training-free signal for anomaly detection and safer deployment.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="stat">
+          <div class="stat-num">−41<span>%</span></div>
+          <div class="stat-label">Real-world inference<br>latency</div>
         </div>
-    </section>
-
-    <section class="section" id="method">
-        <div class="container">
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <h2 class="title is-2">Method Overview</h2>
-                    <div class="content has-text-justified paper-content">
-                        <p>
-                            Conventional diffusion and flow-matching policies learn time-dependent vector fields and rely on a pre-defined inference schedule. GeCO removes this dependency by learning a <strong>single stationary velocity field</strong> in the action-sequence space. Expert actions become stable attractors, turning action generation into a convergence problem rather than a rollout through fictitious time.
-                        </p>
-                        <p>
-                            To ensure robust optimization in continuous control, GeCO introduces a velocity rescaling mechanism that modulates the field magnitude based on the distance to the expert manifold. This creates a geometric sink around valid action modes and yields a practical inference loop that is both adaptive and stable.
-                        </p>
-                        <p>
-                            Because the learned field is stationary, its residual norm directly reflects whether the current state-action pair lies near a learned in-distribution manifold. This provides a simple but effective uncertainty estimate without auxiliary heads, ensembles, or extra safety networks.
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <div class="stat">
+          <div class="stat-num">−75<span>%</span></div>
+          <div class="stat-label">Compute vs. Rectified Flow<br>at higher success (LIBERO)</div>
         </div>
-    </section>
-
-    <section class="section section-alt" id="results">
-        <div class="container">
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <h2 class="title is-2">Why GeCO</h2>
-                    <div class="content has-text-justified paper-content">
-                        <ul class="paper-list">
-                            <li><strong>More efficient inference:</strong> computation is driven by convergence rather than a rigid number of denoising or integration steps.</li>
-                            <li><strong>Better robustness:</strong> the learned stationary geometry naturally separates in-distribution and anomalous states.</li>
-                            <li><strong>Drop-in compatibility:</strong> GeCO can serve as a plug-and-play replacement for standard flow-matching heads.</li>
-                            <li><strong>Scalable design:</strong> the framework applies to both standard simulation policies and large Vision-Language-Action models.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        <div class="stat">
+          <div class="stat-num">0.93</div>
+          <div class="stat-label">OOD AUROC,<br>training-free</div>
         </div>
-    </section>
+      </div>
 
-    <section class="section" id="bibtex">
-        <div class="container content">
-            <div class="columns is-centered">
-                <div class="column is-four-fifths">
-                    <h2 class="title is-2 has-text-centered">BibTeX</h2>
-                    <pre><code>@article{zhang2026generative,
+      <figure class="figure">
+        <img src="./static/images/teaser.jpg" alt="GeCO overview: paradigm shift, adaptive computation, intrinsic safety">
+        <figcaption><b>Overview.</b> <b>(A)</b> Standard flow matching integrates along a rigid time schedule, while GeCO optimizes an action sequence in a stationary field until <span class="m">\(f_\theta \to 0\)</span>. <b>(B)</b> Simple transit converges in a few steps and grasping uses more. <b>(C)</b> In-distribution states settle into low-norm attractors. OOD states keep a high field norm, so anomalies can be detected at zero extra cost.</figcaption>
+      </figure>
+
+      <h2 class="h2">Abstract</h2>
+      <p class="prose">
+        Diffusion and flow-based generators are increasingly used in robot policies to produce action chunks from visual observations, proprioception, and language instructions. However, closed-loop robot control requires solving action-generation problems of varying difficulty, whereas standard diffusion and flow-matching inference typically follows a fixed integration schedule. We introduce <b>Generative Control as Optimization (GeCO)</b>, a time-unconditional framework that turns action synthesis from fixed-time integration into iterative optimization. GeCO learns a stationary velocity field over action sequences and refines actions until the field norm becomes small. This enables adaptive computation at each planning call: simple states can terminate early, while difficult states can use additional refinement. The same field norm also provides a lightweight signal for non-convergent action generation under distribution shift. GeCO can be instantiated in both diffusion-transformer policies and flow-matching Vision-Language-Action (VLA) systems without changing the surrounding policy interface. Across simulation benchmarks and real-world tasks, GeCO matches or improves task performance while enabling convergence-based inference as a plug-and-play replacement for standard time-conditioned action generators.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ METHOD ============ -->
+  <section class="section alt" id="method">
+    <div class="wrap">
+      <p class="eyebrow">Method</p>
+      <h2 class="h2">From integrating through time to optimizing to equilibrium</h2>
+
+      <div class="compare">
+        <div class="compare-card bad">
+          <h3><i class="fas fa-stopwatch"></i> Time-conditioned flow matching</h3>
+          <div class="eq">\[ a \leftarrow a + \Delta t \, v_\theta(a, t, z), \quad t: 0 \to 1 \]</div>
+          <ul>
+            <li>Fixed number of steps regardless of state difficulty</li>
+            <li>No intrinsic signal for when an action is "done"</li>
+            <li>Uncertainty estimation needs ensembles or extra passes</li>
+          </ul>
+        </div>
+        <div class="compare-card good">
+          <h3><i class="fas fa-bullseye"></i> GeCO (time-unconditional)</h3>
+          <div class="eq">\[ a^{(k+1)} = a^{(k)} - \eta_k \, f_\theta(a^{(k)}, z) \]</div>
+          <ul>
+            <li>Stop when <span class="m">\(\|f_\theta\| \le \tau_{\text{opt}}\)</span>, so compute follows difficulty</li>
+            <li>Expert actions are stable attractors of a single field</li>
+            <li>Final <span class="m">\(\|f_\theta\|\)</span> is a free OOD score</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h4>Train a stationary field</h4>
+          <p>Interpolate <span class="m">\(x_\gamma = \gamma a + (1-\gamma)\varepsilon\)</span> but <b>never give <span class="m">\(\gamma\)</span> to the model</b>. Regress the velocity-rescaled target <span class="m">\(g^\star = (\varepsilon - a)\,c(\gamma)\)</span>, where <span class="m">\(c(1)=0\)</span>, so the field vanishes on demonstrations.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h4>Optimize, don't integrate</h4>
+          <p>At each planning call, descend the field from a prior sample. Exit early once the field norm falls below <span class="m">\(\tau_{\text{opt}}\)</span>, or stop at <span class="m">\(K_{\max}\)</span>. Execute the first <span class="m">\(H\)</span> actions and replan (receding horizon).</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h4>Read the residual</h4>
+          <p>In-distribution states converge to <span class="m">\(\|f_\theta\|\approx 0\)</span>. Anomalous states stay high. <span class="m">\(\mathrm{Score}(o_t) = \|f_\theta(\hat a_t, z_t)\|\)</span> flags OOD with essentially no overhead.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <i class="fas fa-plug"></i>
+        <div><b>Plug-and-play for VLAs.</b> For π<sub>0</sub>-style flow-matching heads, set the time input to <span class="m">\(t=0\)</span> during fine-tuning. The same pre-trained weights then learn a stationary field, with no change to architecture, action representation, or control API.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REAL WORLD ============ -->
+  <section class="section" id="real-world">
+    <div class="wrap">
+      <p class="eyebrow">Real-World Deployment</p>
+      <h2 class="h2">Millimeter-precision manipulation on the Galaxea R1 Lite</h2>
+      <p class="prose">We swap the flow-matching action head of <b>Galaxea G0 Plus</b> for GeCO and fine-tune both on the same teleoperated demonstrations with the same training budget. We evaluate two contact-rich tasks over 20 physical trials each, with object positions randomized.</p>
+
+      <figure class="figure">
+        <img src="./static/images/real_setup.jpg" alt="Real-world task setups: nut assembly and chemistry tube arrangement">
+        <figcaption><b>Task setups.</b> Left: <i>Nut Assembly</i>, where both nuts must be fully threaded onto their bolts. Right: <i>Chemistry Tube Arrangement</i>, where tubes must be fully seated in tight slots of a randomly placed and rotated rack.</figcaption>
+      </figure>
+
+      <div class="tabs" data-tabs>
+        <div class="tab-bar" role="tablist">
+          <button class="tab active" data-tab="nut" role="tab">Nut Assembly</button>
+          <button class="tab" data-tab="tube" role="tab">Tube Arrangement</button>
+        </div>
+
+        <div class="tab-panel active" data-panel="nut">
+          <div class="rw-grid">
+            <div class="rw-media">
+              <img src="./static/images/real_nut_rollout.jpg" alt="Nut assembly rollout">
+              <img src="./static/images/real_nut_stat.png" alt="Nut assembly NFE and inference time over the episode" class="plot">
+              <p class="small">Per-call NFE spikes to 9–10 during alignment and threading, then drops to 2–3 in free-space transit (mean 3.50 NFE, 166.7 ms).</p>
+            </div>
+            <div class="rw-bars">
+              <div class="metric">
+                <div class="metric-head"><span>Success rate</span><span class="up">↑</span></div>
+                <div class="bar-row"><span class="who">G0 Plus</span><div class="bar"><i style="width:30%"></i></div><span class="val">30%</span></div>
+                <div class="bar-row ours"><span class="who">+ GeCO</span><div class="bar"><i style="width:70%"></i></div><span class="val">70%</span></div>
+              </div>
+              <div class="metric">
+                <div class="metric-head"><span>Avg. NFE</span><span class="down">↓</span></div>
+                <div class="bar-row"><span class="who">G0 Plus</span><div class="bar"><i style="width:100%"></i></div><span class="val">10.0</span></div>
+                <div class="bar-row ours"><span class="who">+ GeCO</span><div class="bar"><i style="width:50.6%"></i></div><span class="val">5.06</span></div>
+              </div>
+              <div class="metric">
+                <div class="metric-head"><span>Avg. inference time (ms)</span><span class="down">↓</span></div>
+                <div class="bar-row"><span class="who">G0 Plus</span><div class="bar"><i style="width:99%"></i></div><span class="val">252.3</span></div>
+                <div class="bar-row ours"><span class="who">+ GeCO</span><div class="bar"><i style="width:67.7%"></i></div><span class="val">172.4</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-panel" data-panel="tube">
+          <div class="rw-grid">
+            <div class="rw-media">
+              <img src="./static/images/real_tube_rollout.jpg" alt="Tube arrangement rollout">
+              <img src="./static/images/real_tube_stat.png" alt="Tube arrangement NFE and inference time over the episode" class="plot">
+              <p class="small">The episode starts with deep refinement (NFE 10) to lock onto the tube, then early-exits for most of the motion (mean 3.73 NFE, 147.0 ms).</p>
+            </div>
+            <div class="rw-bars">
+              <div class="metric">
+                <div class="metric-head"><span>Success rate</span><span class="up">↑</span></div>
+                <div class="bar-row"><span class="who">G0 Plus</span><div class="bar"><i style="width:25%"></i></div><span class="val">25%</span></div>
+                <div class="bar-row ours"><span class="who">+ GeCO</span><div class="bar"><i style="width:80%"></i></div><span class="val">80%</span></div>
+              </div>
+              <div class="metric">
+                <div class="metric-head"><span>Avg. NFE</span><span class="down">↓</span></div>
+                <div class="bar-row"><span class="who">G0 Plus</span><div class="bar"><i style="width:100%"></i></div><span class="val">10.0</span></div>
+                <div class="bar-row ours"><span class="who">+ GeCO</span><div class="bar"><i style="width:38.2%"></i></div><span class="val">3.82</span></div>
+              </div>
+              <div class="metric">
+                <div class="metric-head"><span>Avg. inference time (ms)</span><span class="down">↓</span></div>
+                <div class="bar-row"><span class="who">G0 Plus</span><div class="bar"><i style="width:100%"></i></div><span class="val">254.6</span></div>
+                <div class="bar-row ours"><span class="who">+ GeCO</span><div class="bar"><i style="width:59%"></i></div><span class="val">150.3</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ADAPTIVE COMPUTE ============ -->
+  <section class="section alt" id="adaptive">
+    <div class="wrap">
+      <p class="eyebrow">Adaptive Computation</p>
+      <h2 class="h2">Computation follows task complexity</h2>
+      <p class="prose">Each line is one planned action chunk along a rollout, colored by the number of function evaluations GeCO needed to converge at that state. Free-space transit converges almost immediately. Effort concentrates at bottlenecks such as pre-grasp alignment and placement, and at the episode start when the policy must ground the instruction among distractors.</p>
+
+      <div class="nfe-legend">
+        <span>NFE = 1</span><div class="jet"></div><span>NFE = 20</span>
+      </div>
+
+      <h3 class="h3">LIBERO-Spatial <small>motion-planning bottlenecks</small></h3>
+      <div class="gallery">
+        <img src="./static/images/sim_sp_0.jpg" alt="LIBERO-Spatial rollout colored by NFE">
+        <img src="./static/images/sim_sp_7.jpg" alt="LIBERO-Spatial rollout colored by NFE">
+        <img src="./static/images/sim_sp_8.jpg" alt="LIBERO-Spatial rollout colored by NFE">
+      </div>
+      <h3 class="h3">LIBERO-Object <small>semantic grounding at episode onset</small></h3>
+      <div class="gallery">
+        <img src="./static/images/sim_ob_1.jpg" alt="LIBERO-Object rollout colored by NFE">
+        <img src="./static/images/sim_ob_4.jpg" alt="LIBERO-Object rollout colored by NFE">
+        <img src="./static/images/sim_ob_5.jpg" alt="LIBERO-Object rollout colored by NFE">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESULTS ============ -->
+  <section class="section" id="results">
+    <div class="wrap">
+      <p class="eyebrow">Simulation Benchmarks</p>
+      <h2 class="h2">Better success–latency trade-offs, from DiT policies to VLAs</h2>
+
+      <div class="tabs" data-tabs>
+        <div class="tab-bar" role="tablist">
+          <button class="tab active" data-tab="libero" role="tab">LIBERO</button>
+          <button class="tab" data-tab="robotwin" role="tab">RoboTwin 2.0 (π<sub>0</sub>)</button>
+          <button class="tab" data-tab="vlabench" role="tab">VLABench (π<sub>0</sub>)</button>
+        </div>
+
+        <div class="tab-panel active" data-panel="libero">
+          <p class="small">With a budget of only 5 steps, GeCO already beats 20-step Rectified Flow (91.9% vs. 90.0%) using 75% less compute. Its peak of 93.5% uses only 11.6 NFE on average.</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Method</th><th>Max steps</th><th>Goal</th><th>Spatial</th><th>Object</th><th>Long</th><th>Avg.</th><th>NFE ↓</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Diffusion Policy</td><td>100</td><td>82.9</td><td>91.4</td><td>88.9</td><td>82.7</td><td>86.5</td><td>100.0</td></tr>
+                <tr><td>Rectified Flow</td><td>20</td><td>92.4</td><td>94.6</td><td>97.0</td><td>76.0</td><td>90.0</td><td>20.0</td></tr>
+                <tr class="ours"><td>GeCO</td><td>5</td><td>91.6</td><td>95.4</td><td>98.2</td><td>82.4</td><td>91.9</td><td><b>5.0</b></td></tr>
+                <tr class="ours"><td>GeCO</td><td>10</td><td>93.0</td><td>95.8</td><td>99.0</td><td>81.8</td><td>92.4</td><td>8.7</td></tr>
+                <tr class="ours"><td>GeCO</td><td>20</td><td><b>95.2</b></td><td><b>95.8</b></td><td><b>99.0</b></td><td>83.8</td><td><b>93.5</b></td><td>11.6</td></tr>
+                <tr class="ours"><td>GeCO</td><td>30</td><td>93.6</td><td>95.2</td><td>98.8</td><td><b>84.8</b></td><td>93.1</td><td>12.8</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="tab-panel" data-panel="robotwin">
+          <p class="small">Bimanual manipulation. <i>Hard</i> adds clutter, texture, lighting, and table-height randomization. GeCO raises the π<sub>0</sub> Hard average from 18% to 28%.</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th rowspan="2">Method</th><th colspan="2">Adjust Bottle</th><th colspan="2">Beat Block Hammer</th><th colspan="2">Blocks Ranking</th><th colspan="2">Click Alarmclock</th><th colspan="2">Click Bell</th><th colspan="2">Avg.</th></tr>
+                <tr class="sub"><th>Easy</th><th>Hard</th><th>Easy</th><th>Hard</th><th>Easy</th><th>Hard</th><th>Easy</th><th>Hard</th><th>Easy</th><th>Hard</th><th>Easy</th><th>Hard</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>ACT</td><td><b>97</b></td><td>23</td><td><b>56</b></td><td>3</td><td>0</td><td>0</td><td>32</td><td>4</td><td><b>58</b></td><td>3</td><td>49</td><td>7</td></tr>
+                <tr><td>π<sub>0</sub></td><td>90</td><td>56</td><td>43</td><td>21</td><td><b>7</b></td><td><b>1</b></td><td>63</td><td>11</td><td>44</td><td>3</td><td>49</td><td>18</td></tr>
+                <tr class="ours"><td>π<sub>0</sub> + GeCO</td><td>86</td><td><b>66</b></td><td>52</td><td><b>36</b></td><td>0</td><td>0</td><td><b>72</b></td><td><b>16</b></td><td>42</td><td><b>21</b></td><td><b>50</b></td><td><b>28</b></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="tab-panel" data-panel="vlabench">
+          <p class="small">Long-horizon, language-conditioned manipulation. The largest gains are on Track 1 (in-distribution skills) and Track 6 (unseen textures and visual variation).</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Method</th><th>Track 1</th><th>Track 2</th><th>Track 3</th><th>Track 4</th><th>Track 6</th><th>Avg.</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>π<sub>0</sub></td><td>47.0</td><td>21.2</td><td>29.1</td><td>17.3</td><td>32.2</td><td>29.4</td></tr>
+                <tr><td>π<sub>0.5</sub></td><td>40.6</td><td><b>22.6</b></td><td>18.0</td><td>16.1</td><td>25.6</td><td>24.5</td></tr>
+                <tr class="ours"><td>π<sub>0</sub> + GeCO</td><td><b>61.0</b></td><td>22.0</td><td><b>34.0</b></td><td><b>20.0</b></td><td><b>45.0</b></td><td><b>36.4</b></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OOD ============ -->
+  <section class="section alt" id="ood">
+    <div class="wrap">
+      <p class="eyebrow">Intrinsic Safety</p>
+      <h2 class="h2">The field norm is a training-free OOD detector</h2>
+      <div class="ood-grid">
+        <div>
+          <p class="prose">We train on <b>LIBERO-Goal</b> and deploy on <b>LIBERO-Spatial</b>, an unseen workspace layout. The final field norm of each planning call serves as the anomaly score. When a lightweight leaky-bucket filter triggers, the episode is stopped before the robot wastes time on a doomed execution.</p>
+          <p class="prose">The baseline, Diff-DAgger's flow-matching loss signal, is close to chance. GeCO separates ID from OOD almost perfectly and needs no extra network, ensemble, or timestep sampling.</p>
+        </div>
+        <div class="ood-cards">
+          <div class="ood-card">
+            <div class="ood-title">AUROC</div>
+            <div class="bar-row"><span class="who">Diff-DAgger</span><div class="bar"><i style="width:53%"></i></div><span class="val">0.53</span></div>
+            <div class="bar-row ours"><span class="who">GeCO</span><div class="bar"><i style="width:93%"></i></div><span class="val">0.93</span></div>
+          </div>
+          <div class="ood-card">
+            <div class="ood-title">OOD detected (TPR)</div>
+            <div class="bar-row"><span class="who">Diff-DAgger</span><div class="bar"><i style="width:14.4%"></i></div><span class="val">14.4%</span></div>
+            <div class="bar-row ours"><span class="who">GeCO</span><div class="bar"><i style="width:82.6%"></i></div><span class="val">82.6%</span></div>
+          </div>
+          <div class="ood-card">
+            <div class="ood-title">OOD execution time saved</div>
+            <div class="bar-row"><span class="who">Diff-DAgger</span><div class="bar"><i style="width:10.3%"></i></div><span class="val">10.3%</span></div>
+            <div class="bar-row ours"><span class="who">GeCO</span><div class="bar"><i style="width:43.2%"></i></div><span class="val">43.2%</span></div>
+          </div>
+          <p class="small">GeCO (Leaky Bucket) at TNR 90.5%. Diff-DAgger (Moving Avg) TNR is 27.8%.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BIBTEX ============ -->
+  <section class="section" id="bibtex">
+    <div class="wrap">
+      <h2 class="h2">BibTeX</h2>
+      <div class="bib">
+        <button class="copy" id="copy-bib" type="button"><i class="far fa-copy"></i> <span>Copy</span></button>
+<pre id="bib-text">@article{zhang2026generative,
   title={Generative Control as Optimization: Time Unconditional Flow Matching for Adaptive and Robust Robotic Control},
   author={Zhang, Zunzhe and Huang, Runhan and Liu, Yicheng and Zhu, Shaoting and Mou, Linzhan and Zhao, Hang},
   journal={arXiv preprint arXiv:2603.17834},
   year={2026}
-}</code></pre>
-                </div>
-            </div>
-        </div>
-    </section>
+}</pre>
+      </div>
+    </div>
+  </section>
 
-    <footer class="footer" id="footer">
-        <div class="container">
-            <div class="content has-text-centered">
-                <p>Page template adapted from <a href="https://nerfies.github.io/"><span class="dnerf">Nerfies</span></a>.</p>
-            </div>
-        </div>
-    </footer>
+  <footer class="footer">
+    <div class="wrap">
+      <p>© 2026 GeCO authors. Website design inspired by <a href="https://nerfies.github.io/" target="_blank">Nerfies</a>; feel free to borrow it.</p>
+    </div>
+  </footer>
 </body>
 
 </html>
