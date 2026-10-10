@@ -44,23 +44,17 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // Reveal on scroll + animate bars
-  var targets = document.querySelectorAll('.section .wrap > *, .showcase-item');
-  document.querySelectorAll('.rw-bars, .ood-cards').forEach(function (el) { el.classList.add('pre-anim'); });
+  // Animate bars when they scroll into view
+  var groups = document.querySelectorAll('.rw-bars, .ood-cards');
   if ('IntersectionObserver' in window) {
-    targets.forEach(function (el) { el.classList.add('reveal'); });
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;
-        e.target.classList.add('in');
-        e.target.querySelectorAll('.pre-anim').forEach(function (b) { b.classList.remove('pre-anim'); });
-        if (e.target.classList.contains('pre-anim')) e.target.classList.remove('pre-anim');
+        e.target.classList.remove('pre-anim');
         io.unobserve(e.target);
       });
-    }, { threshold: 0.12 });
-    targets.forEach(function (el) { io.observe(el); });
-  } else {
-    document.querySelectorAll('.pre-anim').forEach(function (b) { b.classList.remove('pre-anim'); });
+    }, { threshold: 0.2 });
+    groups.forEach(function (el) { el.classList.add('pre-anim'); io.observe(el); });
   }
 
   // Lightbox for figures
